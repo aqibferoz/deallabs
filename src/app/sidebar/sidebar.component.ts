@@ -23,13 +23,14 @@ logOut(){
   sidebar=[
     {icon:'dashboard', url:'/dashboard/home', text:'Dashboard'},
     {icon:'person', url:'/dashboard/profile', text:'Profile'},
-    {icon:'local_pharmacy', url:'/dashboard/vaccines', text:'Vaccines'},
-    {icon:'local_hospital', url:'/dashboard/doctors', text:'Doctors'},
-    {icon:'wc', url:'/dashboard/guardians', text:'Guardians'},
-    {icon:'nature_people', url:'/dashboard/workers', text:'Workers'},
-    {icon:'nature_people', url:'/dashboard/campaigns', text:'Campaigns'},
-    {icon:'nature_people', url:'/dashboard/notifications', text:'Notifications'},
-    {icon:'nature_people', url:'/dashboard/queries', text:'Queries'},
-    // {icon:'exit_to_app', url:'/dashboard/logout', text:'Logout'},
+    {icon:'local_pharmacy', url:'/dashboard/classes', text:'Classes'},
+    {icon:'local_pharmacy', url:'/dashboard/setting', text:'Setting'},
+    {icon:'local_pharmacy', url:'/dashboard/help', text:'Help'},
+    // {icon:'local_hospital', url:'/dashboard/doctors', text:'Doctors'},
+    // {icon:'wc', url:'/dashboard/guardians', text:'Guardians'},
+    // {icon:'nature_people', url:'/dashboard/workers', text:'Workers'},
+    // {icon:'nature_people', url:'/dashboard/campaigns', text:'Campaigns'},
+    // {icon:'nature_people', url:'/dashboard/notifications', text:'Notifications'},
+    // {icon:'nature_people', url:'/dashboard/queries', text:'Queries'},
   ]
 }

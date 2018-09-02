@@ -36,6 +36,9 @@ import { TeamComponent } from './team/team.component';
 import { QueriesComponent } from './queries/queries.component';
 import { ComplainComponent } from './complain/complain.component';
 import { AboutComponent } from './about/about.component';
+import { ClassesComponent } from './classes/classes.component';
+import { SettingComponent } from './setting/setting.component';
+import { HelpComponent } from './help/help.component';
 
 
 
@@ -60,6 +63,10 @@ let ROUTES =[
     {path:'campaigns', component:CampaignsComponent},
     {path:'notifications', component:NotificationsComponent},
     {path:'queries', component:QueriesComponent},
+    //real ones
+    { path: 'classes', component: ClassesComponent},
+    { path: 'setting', component: SettingComponent},
+    { path: 'help', component: HelpComponent},
 
 
   ]},
@@ -99,7 +106,11 @@ let firebaseConfig= {
     TeamComponent,
     QueriesComponent,
     ComplainComponent,
-    AboutComponent
+    AboutComponent,
+    //real ones
+    ClassesComponent,
+    SettingComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

@@ -20,22 +20,22 @@ export class LandingComponent implements OnInit {
     this.questions =
     [
       {
-        query: 'What is Polio?',
+        query: 'What is smartClass?',
         // tslint:disable-next-line:max-line-length
-        answer: `Poliomyelitis (polio) is a highly infectious disease caused by the polio virus. It invades the nervous system, and can cause paralysis or even death in a matter of hours. `,
+        answer: `Smart Classroom (smartClass) is a highly innovative and smart way of taking classes. It invades the nervous system, and can cause paralysis or even death in a matter of hours. `,
         hide: false
       },
       {
-        query: 'How is polio transmitted?',
+        query: 'How does Smart Class works?',
         // tslint:disable-next-line:max-line-length
-        answer: `Poliomyelitis (polio) is a highly infectious disease caused by the polio virus. It invades the nervous system, and can cause paralysis or even death in a matter of hours. `,
+        answer: `smartClassmyelitis (smartClass) is a highly infectious disease caused by the smartClass virus. It invades the nervous system, and can cause paralysis or even death in a matter of hours. `,
         hide: false
       }
       // {
       //   query: 'Is OPV safe for sick children and newborns?',
       //   // tslint:disable-next-line:max-line-length
       // tslint:disable-next-line:max-line-length
-      //   answer: `The Acute Flaccid Paralysis Surveillance system is a critical part of the protection available for families against polio. If a child suddenly shows signs of a floppy, or weak arm or leg, health authorities should be informed immediately so that a sample of the child's faeces can be taken for analysis and the child can get proper treatment. It is very important to act fast – polio is VERY infectious. `,
+      //   answer: `The Acute Flaccid Paralysis Surveillance system is a critical part of the protection available for families against smartClass. If a child suddenly shows signs of a floppy, or weak arm or leg, health authorities should be informed immediately so that a sample of the child's faeces can be taken for analysis and the child can get proper treatment. It is very important to act fast – smartClass is VERY infectious. `,
       //   hide: true
       // },
     ];
