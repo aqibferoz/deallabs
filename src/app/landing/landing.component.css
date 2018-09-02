@@ -1,0 +1,91 @@
+
+
+h3{
+    font-size: 28px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 31px;
+    color:#292b2c;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+}
+h1{
+    font-size: 40px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 44px;
+    color:#292b2c;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+}
+p,li{
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 30px;
+    color:#292b2c;
+}
+
+.whitex{
+    color:white;
+}
+
+
+.card{
+    border-color:rgb(192, 192, 192);
+    border:2px;
+    border-style: dotted;
+}
+
+.card-text{
+    font-size: 13px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 24px;
+    color:#292b2c;
+}
+
+.container-fluid{
+    padding-top: 1%;
+    /* height: 100%; */
+    /* bottom: 0; */
+    /* padding-bottom: 2%; */
+  }
+  #mainnav a:link, a:visited {
+    font-family: 'Times New Roman', sans-serif;
+    /* font-weight: bold; */
+    font-size: 20px;
+    /* color: white; */
+     /* color: deeppink; */
+    /*text-decoration: none; */
+    text-align: center;
+    padding: 5px 10px;
+  }
+  #mainnav a:hover, a:active{
+    /* background-color:cyan; */
+    /* font-size: 18px; */
+    font-weight: bold;
+    /* color: black; */
+  }
+  input[type="search"]:focus {
+    /* width: 100%; */
+    border: 3px solid black;
+    border-radius: 20px;
+  }
+  input[type="search"]:hover {
+    border: 3px solid red;
+    border-radius: 15px;
+  }
+  button[type="submit"]:hover{
+    /* border: 3px solid yellowgreen; */
+    border-radius: 15px;
+  }
+  .alignimg{
+    float: left;
+    width: 50%;
+    height: 100%;
+    overflow: hidden
+  }
+  
+  
+  

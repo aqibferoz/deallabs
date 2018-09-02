@@ -1,0 +1,201 @@
+<nav class="navbar navbar-expand-lg  bg-light sticky-top" >
+    <a class="navbar-brand" routerLink="/landing">Polio Management System</a>
+    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/landing">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/statistics">Statistics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/team">TEAM</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/complains">complains</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">ABOUT</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <button class="btn btn-outline-success my-2 my-sm-0" routerLink="/login">LOGIN</button>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 col-lg-2">
+        
+        </div>
+        <div class="col-sm-6 col-md-8 col-lg-8 table-responsive  text-uppercase">
+            <div class="row">
+                <caption class="caption">
+                    <br>
+                    <h1 class="text-center"> Polio Management Statistics </h1>
+                    <br>
+                    <!-- <img src="../../../assets/statistics/stats.PNG" alt="Visualization graph"> -->
+                  </caption>
+            </div>
+            <div class="content">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                          <div class="card card-stats">
+                              <div class="card-header card-header-warning card-header-icon">
+                                  <div class="card-icon">
+                                      <i class="material-icons">local_pharmacy</i>
+                                  </div>
+                                  <p class="card-category">Vaccines</p>
+                                  <h3 class="card-title" *ngIf="vaccines">{{vaccines}}
+                                      <small></small>
+                                  </h3>
+                              </div>
+                              <div class="card-footer">
+                                  <div class="stats">
+                                      <i class="material-icons text-danger">warning</i>
+                                      <a >Vaccine Live updates...</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                          <div class="card card-stats">
+                              <div class="card-header card-header-success card-header-icon">
+                                  <div class="card-icon">
+                                      <i class="material-icons">local_hospital</i>
+                                      <!-- <i class="fa fa-user-md"></i> -->
+        
+                                  </div>
+                                  <p class="card-category">Doctors</p>
+                                  <h3 class="card-title" *ngIf="doctors">{{doctors}}</h3>
+                              </div>
+                              <div class="card-footer">
+                                  <div class="stats">
+                                      <i class="material-icons">date_range</i> Last 24 Hours
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                          <div class="card card-stats">
+                              <div class="card-header card-header-danger card-header-icon">
+                                  <div class="card-icon">
+                                      <i class="material-icons">wc</i>
+                                  </div>
+                                  <p class="card-category">Guardians/Children</p>
+                                  <h3 class="card-title" *ngIf="guardians && children">{{guardians}} / {{children}}</h3>
+                              </div>
+                              <div class="card-footer">
+                                  <div class="stats">
+                                      <i class="material-icons">local_offer</i> Tracked from Database
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-6">
+                          <div class="card card-stats">
+                              <div class="card-header card-header-info card-header-icon">
+                                  <div class="card-icon">
+                                        <i class="material-icons">nature_people</i>
+                                    </div>
+                                  <p class="card-category">Workers</p>
+                                  <h3 class="card-title" *ngIf="workers">{{workers}}</h3>
+                              </div>
+                              <div class="card-footer">
+                                  <div class="stats">
+                                      <i class="material-icons">update</i> Just Updated
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        
+           
+
+
+
+          <h1 class="text-center"> Overall Statistics Pakistan!</h1>
+
+              <div>
+                  <div style="display: block">
+                    <canvas baseChart
+                            [datasets]="barChartData"
+                            [labels]="barChartLabels"
+                            [options]="barChartOptions"
+                            [legend]="barChartLegend"
+                            [chartType]="barChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+                  <!-- <button (click)="randomize()">Update</button> -->
+                </div>
+                <h1 class="text-center"> Children Statistics</h1>
+                <div style="display: block" *ngIf="chartData && chartLabels">
+                    <canvas baseChart
+                            [data]="chartData"
+                            [labels]="chartLabels"
+                            [chartType]="pieChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+        </div>
+        <div class="col-sm-3 col-md-2 col-lg-2">
+          
+        </div>
+      </div>
+    </div>
+
+  <footer style="background-color: #6495ED;color:white;">
+        <div class="container-fluid">
+                <h1 class="text-center whitex">Contact Us </h1>
+                <p class="text-center whitex">
+                  <em>Our mission is Polio free world.</em>
+                </p>
+                <div class="row test">
+                  <div class="col-md-4 ">
+                    <p class="whitex">Polio Vaccination System</p>
+                    <p class="whitex">
+                      <!-- <span class="glyphicon glyphicon-map-marker"></span> -->
+                      <img src="../../../assets/Icon/mapmarker (5).png" height="25px" width="25px"> COMSATS Islamabad</p>
+                    <p class="whitex">
+                      <!-- <span class="glyphicon glyphicon-phone"></span> -->
+                      <img src="../../../assets/Icon/pnone (2).png" height="25px" width="25px"> Phone: +92 52 51415151</p>
+                    <p class="whitex">
+                      <!-- <span class="glyphicon glyphicon-envelope"></span> -->
+                      <img src="../../../assets/Icon/msg.png" height="25px" width="25px"> Email: poliovaccinationsystem@mail.com</p>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="row">
+                      <div class="col-sm-6 form-group">
+                        <input type="text" 
+                        class="whitex" class="form-control" id="name" name="name" placeholder="Enter Name" type="text" required>
+                      </div>
+                      <div class="col-sm-6 form-group">
+                        <input class="whitex" type="email" class="form-control" id="email" name="email" placeholder="Enter Email" type="email" required>
+                      </div>
+                    </div>
+                    <textarea class="form-control" id="comments" name="comments" placeholder="Comment here..." rows="5" cols="5"></textarea>
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <button class="btn btn-lg btn-secondary" type="submit">Send Message</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+                <footer class="text-center bg-primary">
+                  <div class="copyright">
+                    <div class="col-md-12 whitex">
+                      <p> &copy; 2017 Copyright &reg; - All Rights with Polio Vaccination System:</p>
+                    </div>
+                  </div>
+                </footer>
+              </div>
+  </footer>
