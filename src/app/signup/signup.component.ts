@@ -10,13 +10,13 @@ import { ApiService } from '../api.service';
 export class SignupComponent implements OnInit {
 
   user={
-    email:'khushboohussain77@gmail.com',
-    password:'polio123'
+    email:'',
+    password:''
   }
 error;  
 correct={
-  email:'khushboohussain77@gmail.com',
-  password:'polio123'
+  email:'',
+  password:''
 }
 
 
@@ -53,8 +53,38 @@ correct={
 
     // }
 
+    
+
   }
 
   
 
+  signup(){
+    this.api.signupAdmin(this.user.email, this.user.password).then(response=>{
+      this.error ='';
+      this.api.adminId = response.user.uid;
+      this.api.admin = response;
+      this.api.addProfile(response.user.uid, {
+        uid: response.user.uid,
+        email: this.user.email,
+        password: this.user.password
+      }).then(ondone=>{
+
+   
+      localStorage.setItem('uid',response.user.uid);
+      this.router.navigate(['dashboard']);
+    },onerror=>{
+      this.error = 'ERROR'+onerror;
+      setTimeout(()=> this.error,5000)
+    })
+    }, err=>{
+      this.error ='ERROR:'+err;
+      setTimeout(()=>{
+        this.error;
+      },5000)
+
+    })
+  
+
+  }
 }

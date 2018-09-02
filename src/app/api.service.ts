@@ -44,6 +44,9 @@ adminId;
   updateAdminProfile(adminId,data){
     return this.afs.doc('admin/'+adminId).update(data);
   }
+  addProfile(id,data){
+    return this.afs.doc('admin/'+id).set(data)
+  }
 
 
 /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: VACCINES  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
