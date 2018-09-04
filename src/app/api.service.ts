@@ -20,9 +20,15 @@ adminId;
   loginAdmin(email, pass){
     return this.fbAuth.auth.signInWithEmailAndPassword(email,pass)
   }
+  loginTeacher(email, pass){
+    return this.fbAuth.auth.signInWithEmailAndPassword(email,pass)
+  }
 
 
   //~ SIGNUP
+  signupTeacher(email, pass){
+    return this.fbAuth.auth.createUserWithEmailAndPassword(email, pass);
+  }
   signupAdmin(email, pass){
     return this.fbAuth.auth.createUserWithEmailAndPassword(email, pass);
   }
@@ -41,32 +47,57 @@ adminId;
   getAdminProfile(adminId){
     return this.afs.doc('admin/'+adminId).valueChanges();
   }
+  getTeacherProfile(id){
+    return this.afs.doc('teachers/'+id).valueChanges();
+
+  }
   updateAdminProfile(adminId,data){
     return this.afs.doc('admin/'+adminId).update(data);
+  }
+  updateTeacherProfile(id,data){
+    return this.afs.doc('teachers/'+id).update(data);
   }
   addProfile(id,data){
     return this.afs.doc('admin/'+id).set(data)
   }
+  addTeacherProfile(id, data){
+    return this.afs.doc('teachers/'+id).set(data);
+  }
 
 
-/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: VACCINES  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: CLASSES  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
  
-//~ CREATE 
 addVaccine(data){
-  return this.afs.collection('vaccines').add(data)
+  return this.afs.collection('classes').add(data)
+}
+//~ CREATE 
+addClass(data){
+  return this.afs.collection('classes').add(data)
 }
 //~ READ 
 getVaccines(){
   return this.afs.collection('vaccines').snapshotChanges();
 }
+getClasses(teacherId){
+  return this.afs.collection('classes', ref=> ref.where('teacherId','==',teacherId)).snapshotChanges();
+}
+getClass(classId){
+  return this.afs.doc('classes/'+classId).valueChanges();
+}
 //~ UPDATE 
 updateVaccine(id, data){
   return this.afs.doc('vaccines/'+id).update(data);
 }
+updateClass(id,data){
+  return this.afs.doc('classes/'+id).update(data);
+
+}
 //~ DELETE 
 deleteVaccine(id){
   return this.afs.doc('vaccines/'+id).delete();
-
+}
+deleteClass(id){
+  return this.afs.doc('classes/'+id).delete();
 }
 
 /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: DOCTORS  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */

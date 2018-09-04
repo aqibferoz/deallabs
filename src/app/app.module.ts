@@ -39,6 +39,8 @@ import { AboutComponent } from './about/about.component';
 import { ClassesComponent } from './classes/classes.component';
 import { SettingComponent } from './setting/setting.component';
 import { HelpComponent } from './help/help.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { ClassComponent } from './class/class.component';
 
 
 
@@ -65,6 +67,7 @@ let ROUTES =[
     {path:'queries', component:QueriesComponent},
     //real ones
     { path: 'classes', component: ClassesComponent},
+    { path: 'classes/:id' ,component:ClassComponent},
     { path: 'setting', component: SettingComponent},
     { path: 'help', component: HelpComponent},
 
@@ -110,7 +113,8 @@ let firebaseConfig= {
     //real ones
     ClassesComponent,
     SettingComponent,
-    HelpComponent
+    HelpComponent,
+    ClassComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +125,8 @@ let firebaseConfig= {
     AngularFireAuthModule,
     Ng2SearchPipeModule,
     OrderModule,
-    ChartsModule
+    ChartsModule,
+    QRCodeModule
     
   ],
   providers: [ApiService],

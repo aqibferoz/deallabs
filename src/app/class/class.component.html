@@ -1,0 +1,246 @@
+
+<div class="main-panel">
+  <app-header></app-header>
+  <div class="content" >
+  <div class="container-fluid row">
+      <div class="col-md-4">
+          <div class="card">
+              <div class="card-header card-header-primary">
+                  <h4 class="card-title text-center ">Assignments               
+                      <div class="pull-right btn btn-warning" data-toggle="modal" role="dialog" data-target="#exampleModal" data-backdrop="static" date-keyboard="false" data-focus="true" #tref><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
+                  </h4>
+                  <p class="card-category"> Your class schedule or taken </p>
+              </div>
+              <div class="card-body">
+                  <div class="table-responsive">
+                    <div class="input-group">
+                      <span class="input-group-btn">
+                        <a class="btn btn-secondary" type="button" aria-label=""><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                      </span>
+                      <input type="search" class="form-control" name="name" id="name" placeholder="Search..." aria-label="" [(ngModel)]="term">
+                    </div>
+
+                    
+                    <table class="table"> 
+                        <thead class=" text-primary">
+                            <th (click)="orderBy('courseName')">
+                                Assignment #
+                                <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                            </th>
+                            <th (click)="orderBy('courseId')">
+                              Expiry Date
+                              <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                            </th>
+                            <th>
+                              Status
+                            </th>
+                             <th>
+                                Actions
+                            </th>
+
+                        </thead>
+                        <tbody *ngIf="vaccines">
+                            <tr   >
+                                <td>
+                                  {{x?.id}}
+                                </td>
+                                <td>
+                                  <qrcode [qrdata]="x.id"  colordark="#A23DB7" [size]="128" [level]="'M'"></qrcode>
+
+                                </td>
+                                <td>
+                                  {{x?.courseName}}
+                                </td>
+                                <td>
+                                    {{x?.courseId}}
+                                </td>
+                                <td>
+                                    {{x?.room}}
+                                </td>
+                                <td>
+                                  0
+                                </td>
+                                 <td>
+                                    {{x?.note}}
+                                 </td>
+                                 <td>
+
+                                    <span class="btn btn-sm btn-danger" (click)="selectedVaccine = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-warning" (click)="selectedVaccine = x" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-success" (click)="details(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
+                                  </td>
+                            </tr>
+                        </tbody>
+                    </table>                   </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title text-center ">Quizes               
+                    <div class="pull-right btn btn-warning" data-toggle="modal" role="dialog" data-target="#exampleModal" data-backdrop="static" date-keyboard="false" data-focus="true" #tref><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
+                </h4>
+                <!-- <p class="card-category text-center"> Time for  </p> -->
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <a class="btn btn-secondary" type="button" aria-label=""><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                    </span>
+                    <input type="search" class="form-control" name="name" id="name" placeholder="Search..." aria-label="" [(ngModel)]="term">
+                  </div>
+
+                  
+                   <table class="table"> 
+                        <thead class=" text-primary">
+                            <th (click)="orderBy('courseName')">
+                                Quiz Name
+                                <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                            </th>
+                            <th (click)="orderBy('courseId')">
+                              Quiz Date
+                              <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                            </th>
+                            <th (click)="orderBy('room')">
+                                Marks
+                                <i *ngIf="order == 'room'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                            </th>
+                            <th>
+                              Status
+                            </th>
+                             <th>
+                                Actions
+                            </th>
+
+                        </thead>
+                        <tbody *ngIf="vaccines">
+                            <tr   >
+                                <td>
+                                  {{x?.id}}
+                                </td>
+
+                                <td>
+                                  {{x?.courseName}}
+                                </td>
+                                <td>
+                                    {{x?.courseId}}
+                                </td>
+                                <td>
+                                    {{x?.room}}
+                                </td>
+                                <td>
+                                  0
+                                </td>
+                                 <td>
+                                    {{x?.note}}
+                                 </td>
+                                 <td>
+
+                                    <span class="btn btn-sm btn-danger" (click)="selectedVaccine = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-warning" (click)="selectedVaccine = x" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-success" (click)="details(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
+                                  </td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+          <!-- <div class="card-header card-header-primary">
+              <h4 class="card-title text-center ">Assignments: {{ class?.courseName}}                
+                  <div class="pull-right btn btn-warning" data-toggle="modal" role="dialog" data-target="#exampleModal" data-backdrop="static" date-keyboard="false" data-focus="true" #tref><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
+              </h4>
+              <p class="card-category"> Your class schedule or taken </p>
+          </div> -->
+          <div class="card-body">
+              <div class="card card-profile"  >
+                  <div class="card-avatar">
+                      <a>
+                          <img class="img" src="./assets/img/faces/avatar.jpg " />
+
+                        
+                      </a>
+                  </div>
+                  <div class="card-body">
+                          <!-- <input type="text" class="form-control" [(ngModel)]="class.photo"> -->
+
+                      <h6 class="card-category text-gray">{{class?.room}} </h6>
+                      <h4 class="card-title">{{class?.courseName}} / {{class?.courseId}} </h4>
+                      <p class="card-description">
+                         {{admin.aboutMe}}
+                         <br>
+                         <strong>32</strong>  Students
+                         
+                      </p>
+                      <table class="text-center table bordered striped">
+                          <thead style="background-color:rgba(0, 0, 0, 0.086)">
+                             <th>Monday</th>
+                             <th>Tuesday</th>
+                             <th>Wednesday</th>
+                             <th>Thursday</th>
+                             <th>Friday</th>
+                           </thead>
+                           <tbody>
+                             <tr>
+                                <td class="small">2:30pm -- 5:30pm</td>
+                                <td>2:30pm -- 5:30pm</td>
+                                <td>2:30pm -- 5:30pm</td>
+                                <td>2:30pm -- 5:30pm</td>
+                                <td>2:30pm -- 5:30pm</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <hr>
+                        
+                      <a  class="btn btn-primary btn-round" (click)="logOut()">logout</a>
+                  </div>
+              </div>
+              <div class="table-responsive">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <a class="btn btn-secondary" type="button" aria-label=""><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                  </span>
+                  <input type="search" class="form-control" name="name" id="name" placeholder="Search student..." aria-label="" [(ngModel)]="term">
+                </div>
+
+                
+                  <table class="table">
+                      <thead class=" text-primary">
+                          <th>
+                            Roll No
+                          </th>
+                          <th (click)="orderBy('courseName')">
+                             Name
+                              <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                          </th>
+                          
+                           <th>
+                              Actions
+                          </th>
+
+                      </thead>
+                      <tbody *ngIf="students">
+                          <tr *ngFor="let x of students | filter:term | orderBy: order" >
+                              <td>{{x?.rollno}}</td>
+                              <td>{{x.name}}</td>
+                              <td>
+                                  <!-- <span class="btn btn-sm btn-danger" (click)="selectedVaccine = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span>  -->
+                                  <!-- <span class="btn btn-sm btn-warning" (click)="selectedVaccine = x" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit" aria-hidden="true"></i></span>  -->
+                                  <span class="btn btn-sm btn-success" (click)="details(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
+                                </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+</div>
+</div>

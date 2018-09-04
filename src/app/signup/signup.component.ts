@@ -60,11 +60,11 @@ correct={
   
 
   signup(){
-    this.api.signupAdmin(this.user.email, this.user.password).then(response=>{
+    this.api.signupTeacher(this.user.email, this.user.password).then(response=>{
       this.error ='';
       this.api.adminId = response.user.uid;
       this.api.admin = response;
-      this.api.addProfile(response.user.uid, {
+      this.api.addTeacherProfile(response.user.uid, {
         uid: response.user.uid,
         email: this.user.email,
         password: this.user.password

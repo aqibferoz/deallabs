@@ -20,15 +20,16 @@ export class ProfileComponent implements OnInit {
     
 
 
-    this.api.getAdminProfile(localStorage.getItem('uid')).subscribe(resp=>{
+    this.api.getTeacherProfile(localStorage.getItem('uid')).subscribe(resp=>{
       this.admin =resp;
       console.log(resp);
     });
   }
 
   updateProfile(){
-    this.api.updateAdminProfile(this.api.adminId, this.admin).then(resp=>{
-      console.log('admin Updated');
+    this.api.updateTeacherProfile(this.api.adminId, this.admin).then(resp=>{
+      console.log('Teacher Updated');
+      alert(`Teacher profile updated`)
     })
   }
 

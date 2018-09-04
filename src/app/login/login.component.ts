@@ -11,8 +11,8 @@ export class LoginComponent implements OnInit {
 
 
   user={
-    email:'khushboohussain77@gmail.com',
-    password:'polio123'
+    email:'moeidsaleemkhan@gmail.com',
+    password:'moeid123'
   }
 error;  
 correct={
@@ -29,12 +29,27 @@ correct={
 
 
   login(){
-    this.api.loginAdmin(this.user.email, this.user.password).then(response=>{
-      this.error ='';
-      this.api.adminId = response.user.uid;
-      this.api.admin = response;
-      localStorage.setItem('uid',response.user.uid);
-      this.router.navigate(['dashboard']);
+    this.api.loginTeacher(this.user.email, this.user.password).then(response=>{
+
+      this.api.getTeacherProfile(response.user.uid).subscribe(resp=>{
+        if(resp){ /* if database has the user */
+          this.error ='';
+          this.api.adminId = response.user.uid;
+          this.api.admin = response;
+          localStorage.setItem('uid',response.user.uid);
+          this.router.navigate(['dashboard']);
+        }else{
+          this.error ='ERROR: No user profile found in the database. Please signup with another ID';
+          setTimeout(()=>{
+            this.error;
+          },5000)
+
+        }
+     
+  
+        
+      })
+    
     }, err=>{
       this.error ='ERROR:'+err;
       setTimeout(()=>{
