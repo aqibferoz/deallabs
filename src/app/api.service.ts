@@ -109,9 +109,15 @@ addDoctor(data){
   return this.afs.doc('doctors/'+data.uid).set(data)
   })
 }
+addAssigment(data){
+  return this.afs.collection('assigments').add(data);
+}
 //~ READ 
 getDoctors(){
   return this.afs.collection('doctors').snapshotChanges();
+}
+getAssigments(classId){
+  return this.afs.collection('assigments', ref=> ref.where('classId','==',classId)).snapshotChanges();
 }
 //~ READ Single 
 getDoctor(id){

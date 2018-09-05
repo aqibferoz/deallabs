@@ -28,7 +28,7 @@
                                 <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                             </th>
                             <th (click)="orderBy('courseId')">
-                              Expiry Date
+                              Deadline
                               <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                             </th>
                             <th>
@@ -39,30 +39,20 @@
                             </th>
 
                         </thead>
-                        <tbody *ngIf="vaccines">
-                            <tr   >
-                                <td>
-                                  {{x?.id}}
+                        <tbody *ngIf="assigments">
+                            <tr *ngFor="let x of assigments">
+                                <td class="small">
+                                  {{x?.num}}
+                                </td>
+                                <td class="small">
+                                  {{x?.deadline}}
                                 </td>
                                 <td>
-                                  <qrcode [qrdata]="x.id"  colordark="#A23DB7" [size]="128" [level]="'M'"></qrcode>
-
+                                        <span class="badge badge-warning" *ngIf="x.status == 'active'">Active</span>
+                                        <span class="badge badge-success" *ngIf="x.status == 'completed'">Completed</span>
+                                        <span class="badge badge-danger" *ngIf="x.status == 'cancel'">Cancel</span>
+                     
                                 </td>
-                                <td>
-                                  {{x?.courseName}}
-                                </td>
-                                <td>
-                                    {{x?.courseId}}
-                                </td>
-                                <td>
-                                    {{x?.room}}
-                                </td>
-                                <td>
-                                  0
-                                </td>
-                                 <td>
-                                    {{x?.note}}
-                                 </td>
                                  <td>
 
                                     <span class="btn btn-sm btn-danger" (click)="selectedVaccine = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
@@ -172,7 +162,7 @@
                       <h6 class="card-category text-gray">{{class?.room}} </h6>
                       <h4 class="card-title">{{class?.courseName}} / {{class?.courseId}} </h4>
                       <p class="card-description">
-                         {{admin.aboutMe}}
+                         {{admin?.aboutMe}}
                          <br>
                          <strong>32</strong>  Students
                          
@@ -244,3 +234,62 @@
 
 </div>
 </div>
+
+
+
+  <!-- Modal INSERT-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Assigment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <form #doctorForm="ngForm" (submit)="submit(doctorForm.value)">
+                <div class="row">
+          <div class="col-md-12 form-group">
+            <label for=""></label>
+            <input type="text"
+              class="form-control" name="title" placeholder="Assigment Title" ngModel>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for=""></label>
+            <input type="number"
+              class="form-control" name="num"  aria-describedby="helpId" placeholder="Assignment #03" ngModel>
+          </div>
+          <div class="col-md-6 form-group">
+              <label for=""></label>
+              <input type="date"
+                class="form-control" name="deadline" aria-describedby="helpId" placeholder="Deadline" ngModel>
+            </div>
+        
+                  <div class="col-md-6 form-group">
+                          <label for="">Status</label>
+                          <select class="form-control" name="status" ngModel>
+                            <option value="active">Active</option>
+                            <option value="completed">completed</option>
+                            <option value="cancel">cancel</option>
+                          </select>
+                      </div>
+                  <div class="col-md-12 form-group">
+                      <label for="">Note</label>
+                      <textarea class="form-control" name="note"  rows="3" placeholder="Prescription Note.." ngModel></textarea>
+                    </div>
+          
+        
+                </div>
+        </form>
+        
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="submit(doctorForm.value)" >Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
