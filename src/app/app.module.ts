@@ -79,12 +79,12 @@ let ROUTES =[
 ]
 
 let firebaseConfig= {
-  apiKey: "AIzaSyB529CKeEX6S_wTIGCdxpnvfK0v4x0Z7VQ",
-  authDomain: "polio-management.firebaseapp.com",
-  databaseURL: "https://polio-management.firebaseio.com",
-  projectId: "polio-management",
-  storageBucket: "",
-  messagingSenderId: "689787945890"
+  apiKey: "AIzaSyCKlQfSGOwucl0hBwVMMrEemNVGMaHCQPQ",
+  authDomain: "university-management-fyp.firebaseapp.com",
+  databaseURL: "https://university-management-fyp.firebaseio.com",
+  projectId: "university-management-fyp",
+  storageBucket: "university-management-fyp.appspot.com",
+  messagingSenderId: "164013187253"
 };
 
 @NgModule({

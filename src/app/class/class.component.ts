@@ -21,7 +21,6 @@ export class ClassComponent implements OnInit {
     console.log(id); 
   }
 
-
   getClass(id){
      this.api.getClass(id).subscribe(res=>{
        console.log(res);
