@@ -59,6 +59,10 @@ export class ClassComponent implements OnInit {
     $('#addAssignmentModal').modal('hide')
 
     console.log(val);
+//file upload 
+  // fileUpload(val.file);
+// val.file = <download_url> 
+
     val.startDate = new Date().getUTCDate();
     val.classId = this.classId;
 

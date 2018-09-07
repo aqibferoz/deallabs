@@ -3,6 +3,7 @@
   <app-header></app-header>
   <div class="content" >
   <div class="container-fluid row">
+    <!-- READ ASSIGNMENTS -->
       <div class="col-md-4">
           <div class="card">
               <div class="card-header card-header-primary">
@@ -141,12 +142,6 @@
     </div>
     <div class="col-md-4">
       <div class="card">
-          <!-- <div class="card-header card-header-primary">
-              <h4 class="card-title text-center ">Assignments: {{ class?.courseName}}                
-                  <div class="pull-right btn btn-warning" data-toggle="modal" role="dialog" data-target="#exampleModal" data-backdrop="static" date-keyboard="false" data-focus="true" #tref><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
-              </h4>
-              <p class="card-category"> Your class schedule or taken </p>
-          </div> -->
           <div class="card-body">
               <div class="card card-profile"  >
                   <div class="card-avatar">
@@ -284,6 +279,17 @@
                             <option value="cancel">cancel</option>
                           </select>
                       </div>
+
+                      <div class="col-md-12 form-group">
+                          <label for=""></label>
+
+                          <div style="background-color:#fece1a;padding:30px;width:100%;border:2px;border-style: dotted">
+                          <p class="text-center">Upload File</p>
+                          </div>
+                          <input type="file"
+                            class="form-control" name="deadline" aria-describedby="helpId" placeholder="Deadline" ngModel>
+                        </div>
+                      
                   <div class="col-md-12 form-group">
                       <label for="">Note</label>
                       <textarea class="form-control" name="note"  rows="3" placeholder=" Note.." ngModel></textarea>
