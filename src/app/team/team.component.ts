@@ -14,7 +14,7 @@ export class TeamComponent implements OnInit {
   constructor(private api:ApiService) { }
 
   ngOnInit() {
-    this.api.getDoctors().map(actions => {
+    this.api.getTeachers().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data()
         const id = a.payload.doc.id;
@@ -24,16 +24,16 @@ export class TeamComponent implements OnInit {
       this.doctors = doc;
       
     });
-    this.api.getWorkers().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data()
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      })
-    }).subscribe(worker=>{
-      this.workers = worker;
+    // this.api.getWorkers().map(actions => {
+    //   return actions.map(a => {
+    //     const data = a.payload.doc.data()
+    //     const id = a.payload.doc.id;
+    //     return { id, ...data };
+    //   })
+    // }).subscribe(worker=>{
+    //   this.workers = worker;
       
-    });
+    // });
   }
 
 

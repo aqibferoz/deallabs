@@ -67,15 +67,15 @@ export class LandingComponent implements OnInit {
     if(this.query.message && this.query.email){
       let x = new Date().toLocaleDateString();
       this.query.date = x;
-      this.api.saveQuery(this.query).then(r=>{
-        this.query ={
-          email:'',
-          message:'',
-          name:'',
-          date:''
-        };
-        alert('Query sent to the adminstration! Thanks.')
-      })
+      // this.api.saveQuery(this.query).then(r=>{
+      //   this.query ={
+      //     email:'',
+      //     message:'',
+      //     name:'',
+      //     date:''
+      //   };
+      //   alert('Query sent to the adminstration! Thanks.')
+      // })
     }
   
   }

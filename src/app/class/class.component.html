@@ -7,7 +7,7 @@
           <div class="card">
               <div class="card-header card-header-primary">
                   <h4 class="card-title text-center ">Assignments               
-                      <div class="pull-right btn btn-warning" data-toggle="modal" role="dialog" data-target="#exampleModal" data-backdrop="static" date-keyboard="false" data-focus="true" #tref><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
+                      <div class="pull-right btn btn-warning" data-toggle="modal" role="dialog" data-target="#addAssignmentModal" data-backdrop="static" date-keyboard="false" data-focus="true" #tref><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
                   </h4>
                   <p class="card-category"> Your class schedule or taken </p>
               </div>
@@ -56,9 +56,9 @@
                                 </td>
                                  <td>
 
-                                    <span class="btn btn-sm btn-danger" (click)="selectedVaccine = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
-                                    <span class="btn btn-sm btn-warning" (click)="selectedVaccine = x" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
-                                    <span class="btn btn-sm btn-success" (click)="details(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-danger" (click)="selectedAssignment = x" data-toggle="modal" data-target="#deleteAssignmentModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-warning" (click)="selectedAssignment = x" data-toggle="modal" data-target="#editAssignmentModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-success" (click)="AssignmentDetails(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
                                   </td>
                             </tr>
                         </tbody>
@@ -66,11 +66,15 @@
               </div>
           </div>
       </div>
+
+
+
+      <!-- READ QUIZES -->
       <div class="col-md-4">
         <div class="card">
             <div class="card-header card-header-primary">
                 <h4 class="card-title text-center ">Quizes               
-                    <div class="pull-right btn btn-warning" data-toggle="modal" role="dialog" data-target="#exampleModal" data-backdrop="static" date-keyboard="false" data-focus="true" #tref><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
+                    <div class="pull-right btn btn-warning" data-toggle="modal" role="dialog" data-target="#addQuizModal" data-backdrop="static" date-keyboard="false" data-focus="true" #tref><i class="fa fa-plus" aria-hidden="true"></i> ADD</div>
                 </h4>
                 <!-- <p class="card-category text-center"> Time for  </p> -->
             </div>
@@ -87,16 +91,16 @@
                    <table class="table"> 
                         <thead class=" text-primary">
                             <th (click)="orderBy('courseName')">
-                                Quiz Name
+                                Quiz #
                                 <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                             </th>
-                            <th (click)="orderBy('courseId')">
-                              Quiz Date
+                            <th (click)="orderBy('courseName')">
+                              Title
                               <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                            </th>
-                            <th (click)="orderBy('room')">
-                                Marks
-                                <i *ngIf="order == 'room'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                          </th>
+                            <th (click)="orderBy('courseId')">
+                              Deadline
+                              <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                             </th>
                             <th>
                               Status
@@ -106,33 +110,28 @@
                             </th>
 
                         </thead>
-                        <tbody *ngIf="vaccines">
-                            <tr   >
-                                <td>
-                                  {{x?.id}}
+                        <tbody *ngIf="quizes">
+                          <tr *ngFor="let x of quizes">
+                                <td class="strong">
+                                  {{x?.num}}
                                 </td>
-
-                                <td>
-                                  {{x?.courseName}}
+                                <td class="small ">
+                                    <b>{{x?.title}}</b>
                                 </td>
-                                <td>
-                                    {{x?.courseId}}
+                                <td class="small">
+                                    {{x?.deadline}}
                                 </td>
-                                <td>
-                                    {{x?.room}}
-                                </td>
-                                <td>
-                                  0
-                                </td>
-                                 <td>
-                                    {{x?.note}}
-                                 </td>
-                                 <td>
-
-                                    <span class="btn btn-sm btn-danger" (click)="selectedVaccine = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
-                                    <span class="btn btn-sm btn-warning" (click)="selectedVaccine = x" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
-                                    <span class="btn btn-sm btn-success" (click)="details(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
+                                <td class="small">
+                                  <span class="badge badge-warning" *ngIf="x.status == 'active'">Active</span>
+                                  <span class="badge badge-success" *ngIf="x.status == 'completed'">Completed</span>
+                                  <span class="badge badge-danger" *ngIf="x.status == 'cancel'">Cancel</span>
+                          </td>
+                                 <td class="small">
+                                    <span class="btn btn-sm btn-danger" (click)="selectedQuiz = x" data-toggle="modal" data-target="#deleteQuizModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-warning" (click)="selectedQuiz = x" data-toggle="modal" data-target="#editQuizModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-success" (click)="detailsQuiz(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
                                   </td>
+                                  
                             </tr>
                         </tbody>
                     </table> 
@@ -188,7 +187,7 @@
                         </table>
                         <hr>
                         
-                      <a  class="btn btn-primary btn-round" (click)="logOut()">logout</a>
+                      <a  class="btn btn-warning btn-round" (click)="logOut()">Setting</a>
                   </div>
               </div>
               <div class="table-responsive">
@@ -238,19 +237,28 @@
 
 
 
-  <!-- Modal INSERT-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 
+
+
+  
+
+  <!-- ::::::::::::::::::::::::::::::::::::::::::::::::: MODALS ::::::::::::::::::::::::::::::::::::: -->
+
+  <!-- :::::::::::::: ASSIGNMENTs ::::::::::: -->
+
+  <!--ADD ASSIGNMENT -->
+  <div class="modal fade" id="addAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="addAssignmentModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Assigment</h5>
+          <h5 class="modal-title" id="addAssignmentModalLabel">Add Assigment</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="container">
-            <form #doctorForm="ngForm" (submit)="submit(doctorForm.value)">
+            <form #addAssignmentForm="ngForm" (submit)="submitAssignment(addAssignmentForm.value)">
                 <div class="row">
           <div class="col-md-12 form-group">
             <label for=""></label>
@@ -278,7 +286,7 @@
                       </div>
                   <div class="col-md-12 form-group">
                       <label for="">Note</label>
-                      <textarea class="form-control" name="note"  rows="3" placeholder="Prescription Note.." ngModel></textarea>
+                      <textarea class="form-control" name="note"  rows="3" placeholder=" Note.." ngModel></textarea>
                     </div>
           
         
@@ -289,8 +297,212 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="submit(doctorForm.value)" >Save changes</button>
+          <button type="button" class="btn btn-primary" (click)="submitAssignment(addAssignmentForm.value)" >Save changes</button>
         </div>
       </div>
     </div>
+  </div>
+
+
+  <!--  EDIT ASSIGNMENT-->
+  <div class="modal fade" id="editAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="editAssignmentModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModal">Edit Assignemnt</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="selectedAssignment">
+          <div class="container">
+            <form #assignmentUpdateForm="ngForm" (submit)="updateAssignment(selectedAssignment)">
+                <div class="row">
+          <div class="col-md-12 form-group">
+            <label for=""></label>
+            <input type="text"
+              class="form-control" name="title" id="" aria-describedby="helpId" placeholder="Assignment Title" [(ngModel)]="selectedAssignment.title">
+          </div>
+          <div class="col-md-6 form-group">
+              <label for=""></label>
+              <input type="number"
+                class="form-control" name="num" id="" aria-describedby="helpId" placeholder="Assingment #"  [(ngModel)]="selectedAssignment.num">
+            </div>
+            <div class="col-md-6 form-group">
+                <label for=""></label>
+                <input type="text"
+                  class="form-control" name="deadline" id="" aria-describedby="helpId" placeholder="Deadline"  [(ngModel)]="selectedAssignment.deadline">
+              </div>
+                    <div class="col-md-12 form-group">
+                      <label for="">Note</label>
+                      <textarea class="form-control" name="note" id="" rows="3" placeholder="Extra Note.."  [(ngModel)]="selectedAssignment.note"></textarea>
+                    </div>
+                </div>
+        </form>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updateAssignment(selectedAssignment)" >Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!--  DELETE ASSIGNMENT -->
+<div class="modal fade" id="deleteAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="deleteAssignmentModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm|lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="deleteModal">Confirm Delete</h4>
+      </div>
+      <div class="modal-body" *ngIf="selectedAssignment">
+       Are you sure you want to delete <span class="text-danger">  {{ 'Assignment #' + selectedAssignment?.num}}</span> ?       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger" (click)="deleteAssignment(selectedAssignment)">Delete</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+
+  <!-- :::::::::::::: QUIZES ::::::::::: -->
+
+  <!--ADD QUIZ -->
+  <div class="modal fade" id="addQuizModal" tabindex="-1" role="dialog" aria-labelledby="addQuizModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addQuizModalLabel">Add Quiz</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <form #addQuizForm="ngForm" (submit)="submitQuiz(addQuizForm.value)">
+                <div class="row">
+          <div class="col-md-12 form-group">
+            <label for=""></label>
+            <input type="text"
+              class="form-control" name="title" placeholder="Quiz Title" ngModel>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for=""></label>
+            <input type="number"
+              class="form-control" name="num"  aria-describedby="helpId" placeholder="Quiz #" ngModel>
+          </div>
+          <div class="col-md-6 form-group">
+              <label for="">Deadline</label>
+              <input type="date"
+                class="form-control" name="deadline" aria-describedby="helpId" placeholder="Deadline" ngModel>
+            </div>
+        
+                  <div class="col-md-6 form-group">
+                          <label for="">Status</label>
+                          <select class="form-control" name="status" ngModel>
+                            <option value="active">Active</option>
+                            <option value="completed">completed</option>
+                            <option value="cancel">cancel</option>
+                          </select>
+                      </div>
+                  <div class="col-md-12 form-group">
+                      <label for="">Note</label>
+                      <textarea class="form-control" name="note"  rows="3" placeholder=" Note.." ngModel></textarea>
+                    </div>
+          
+        
+                </div>
+        </form>
+        
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="submitQuiz(addQuizForm.value)" >Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  EDIT QUIZ-->
+  <div class="modal fade" id="editQuizModal" tabindex="-1" role="dialog" aria-labelledby="editQuiz  Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModal">Edit Quiz</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="selectedQuiz">
+          <div class="container">
+            <form #assignmentUpdateForm="ngForm" (submit)="updateQuiz(selectedQuiz)">
+                <div class="row">
+          <div class="col-md-12 form-group">
+            <label for=""></label>
+            <input type="text"
+              class="form-control" name="title" id="" aria-describedby="helpId" placeholder="Assignment Title" [(ngModel)]="selectedQuiz.title">
+          </div>
+          <div class="col-md-6 form-group">
+              <label for=""></label>
+              <input type="number"
+                class="form-control" name="num" id="" aria-describedby="helpId" placeholder="Assingment #"  [(ngModel)]="selectedQuiz.num">
+            </div>
+            <div class="col-md-6 form-group">
+                <label for=""></label>
+                <input type="text"
+                  class="form-control" name="deadline" id="" aria-describedby="helpId" placeholder="Deadline"  [(ngModel)]="selectedQuiz.deadline">
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="">Status</label>
+                <select class="form-control" name="status" [(ngModel)]="selectedQuiz.status">
+                  <option value="active">Active</option>
+                  <option value="completed">completed</option>
+                  <option value="cancel">cancel</option>
+                </select>
+            </div>
+                    <div class="col-md-12 form-group">
+                      <label for="">Note</label>
+                      <textarea class="form-control" name="note" id="" rows="3" placeholder="Extra Note.."  [(ngModel)]="selectedQuiz.note"></textarea>
+                    </div>
+                </div>
+        </form>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updateQuiz(selectedQuiz)" >Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!--  DELETE QUIZ -->
+<div class="modal fade" id="deleteQuizModal" tabindex="-1" role="dialog" aria-labelledby="deleteQuizModal" aria-hidden="true">
+  <div class="modal-dialog modal-sm|lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="deleteModal">Confirm Delete</h4>
+      </div>
+      <div class="modal-body" *ngIf="selectedQuiz">
+       Are you sure you want to delete <span class="text-danger">  {{ 'Quiz #' + selectedQuiz?.num}}</span> ?       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger" (click)="deleteQuiz(selectedQuiz)">Delete</button>
+      </div>
+    </div>
+  </div>
   </div>

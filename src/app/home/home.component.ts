@@ -18,21 +18,21 @@ export class HomeComponent implements OnInit {
   children;
   vaccines;
   ngOnInit() {
-  this.api.getDoctors().subscribe(resp=>{
-    this.doctors = resp.length;
-  });
-  this.api.getAllChildren().subscribe(respx=>{
-    this.children =respx.length;
-  });
-  this.api.getVaccines().subscribe(respxx=>{
-    this.vaccines = respxx.length;
-  });
-  this.api.getWorkers().subscribe(workersx=>{
-    this.workers = workersx.length;
-  })
-  this.api.getGuardians().subscribe(guard=>{
-    this.guardians =guard.length;
-  })
+  // this.api.getClasses(localStorage.getItem('uid')).subscribe(resp=>{
+  //   this.doctors = resp.length;
+  // });
+  // this.api.getAllChildren().subscribe(respx=>{
+  //   this.children =respx.length;
+  // });
+  // this.api.getVaccines().subscribe(respxx=>{
+  //   this.vaccines = respxx.length;
+  // });
+  // this.api.getWorkers().subscribe(workersx=>{
+  //   this.workers = workersx.length;
+  // })
+  // this.api.getGuardians().subscribe(guard=>{
+  //   this.guardians =guard.length;
+  // })
   
   }
 

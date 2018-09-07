@@ -14,7 +14,11 @@ export class ClassComponent implements OnInit {
 
   class;
   students:any =[{rollno:'SP14-BSE-088', name:'Moeid Saleem Khan'}];
+  assigments;
+  quizes;
   classId;
+  selectedAssignment;
+  selectedQuiz;
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
@@ -22,17 +26,20 @@ export class ClassComponent implements OnInit {
     this.getClass(id);
     console.log(id); 
     this.getAssigments();
+    this.getQuizes();
   }
 
   getClass(id){
      this.api.getClass(id).subscribe(res=>{
-       console.log(res);
        this.class =res;
 
      })
   }
 
-  assigments;
+
+
+  //ASSIGMENT - GET
+
   getAssigments(){
     this.api.getAssigments(this.classId).map(actions => {
       return actions.map(a => {
@@ -47,10 +54,9 @@ export class ClassComponent implements OnInit {
   }
 
 
-
-  // Assigment
-  submit(val){
-    $('#exampleModal').modal('hide')
+  // Assigment - ADD
+  submitAssignment(val){
+    $('#addAssignmentModal').modal('hide')
 
     console.log(val);
     val.startDate = new Date().getUTCDate();
@@ -63,4 +69,83 @@ export class ClassComponent implements OnInit {
     })
 
   }
+
+
+  deleteAssignment(data){
+    $('#deleteAssignmentModal').modal('hide');
+    this.selectedAssignment ={};
+    //now removing the class
+    this.api.deleteAssigment(data.id).then(res=>{
+
+    }, err=>{})
+  }
+
+
+  updateAssignment(data){
+    $('#editAssignmentModal').modal('hide');
+    this.api.updateAssigment(data.id, data).then(res=>{
+
+      this.selectedAssignment ={};
+    });
+  }
+
+
+
+
+  /* :::::: QUIZ ::::::::: */
+
+
+  
+  //Quiz - GET
+
+  getQuizes(){
+    this.api.getQuizes(this.classId).map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data()
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      })
+
+    }).subscribe(resp=>{
+      this.quizes =resp;
+    })
+  }
+
+
+  // Assigment - ADD
+  submitQuiz(val){
+    $('#addQuizModal').modal('hide')
+
+    console.log(val);
+    val.startDate = new Date().getUTCDate();
+    val.classId = this.classId;
+
+    this.api.addQuiz(val).then(res=>{
+
+    },err=>{
+      console.log(err);
+    })
+
+  }
+
+
+  deleteQuiz(data){
+    $('#deleteQuizModal').modal('hide');
+    this.selectedQuiz ={};
+    //now removing the class
+    this.api.deleteQuiz(data.id).then(res=>{
+
+    }, err=>{})
+  }
+
+
+  updateQuiz(data){
+    $('#editQuizModal').modal('hide');
+    this.api.updateClass(data.id, data).then(res=>{
+
+      this.selectedQuiz ={};
+    });
+  }
+
+
 }

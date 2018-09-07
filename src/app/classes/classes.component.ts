@@ -17,7 +17,7 @@ export class ClassesComponent implements OnInit {
 
 
   vaccines;
-  selectedVaccine;
+  selectedClass;
 
 
   xxx=''
@@ -60,23 +60,21 @@ export class ClassesComponent implements OnInit {
     });
   }
 
-  delete(vaccine){
+  delete(data){
     $('#deleteModal').modal('hide');
-    this.selectedVaccine ={};
-    //now removing the vaccine
-    this.api.deleteVaccine(vaccine.id).then(res=>{
+    this.selectedClass ={};
+    //now removing the class
+    this.api.deleteClass(data.id).then(res=>{
 
     }, err=>{})
   }
 
   update(data){
     $('#editModal').modal('hide');
-    this.api.updateVaccine(data.id, data).then(res=>{
+    this.api.updateClass(data.id, data).then(res=>{
 
-      this.selectedVaccine ={};
-
-
-    })
+      this.selectedClass ={};
+    });
   }
 
 

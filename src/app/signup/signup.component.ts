@@ -28,7 +28,7 @@ correct={
 
 
   login(){
-    this.api.loginAdmin(this.user.email, this.user.password).then(response=>{
+    this.api.loginTeacher(this.user.email, this.user.password).then(response=>{
       this.error ='';
       this.api.adminId = response.user.uid;
       this.api.admin = response;
