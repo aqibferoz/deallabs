@@ -69,6 +69,11 @@ deleteClass(id){
   return this.afs.doc('classes/'+id).delete();
 }
 
+getClassStudents(classId){
+  return this.afs.collection('student-class', ref=>ref.where('classId','==',classId)).snapshotChanges();
+}
+
+
 
 /* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ASSIGNMENTS  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
  
@@ -96,6 +101,9 @@ deleteAssigment(id){
   return this.afs.doc('assignments/'+id).delete();
 }
 
+uploadedAssignments(assignmentId){
+  return this.afs.collection('uploads', ref=>ref.where('type','==','assignment').where('typeId','==',assignmentId)).snapshotChanges();
+}
 
 
 
@@ -126,7 +134,11 @@ updateQuiz(id,data){
 deleteQuiz(id){
   return this.afs.doc('quizes/'+id).delete();
 }
+uploadedQuizes(quizId){
+  /* will have marks, */
+  return this.afs.collection('uploads', ref=>ref.where('type','==','quiz').where('typeId','==',quizId)).snapshotChanges();
 
+}
 
 
 

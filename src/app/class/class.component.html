@@ -43,7 +43,7 @@
                         <tbody *ngIf="assigments">
                             <tr *ngFor="let x of assigments">
                                 <td class="small">
-                                  {{x?.num}}
+                                  {{x?.id}}
                                 </td>
                                 <td class="small">
                                   {{x?.deadline}}
@@ -59,7 +59,7 @@
 
                                     <span class="btn btn-sm btn-danger" (click)="selectedAssignment = x" data-toggle="modal" data-target="#deleteAssignmentModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
                                     <span class="btn btn-sm btn-warning" (click)="selectedAssignment = x" data-toggle="modal" data-target="#editAssignmentModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
-                                    <span class="btn btn-sm btn-success" (click)="AssignmentDetails(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-success" (click)="AssignmentDetails(x.id)"  > <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
                                   </td>
                             </tr>
                         </tbody>
@@ -130,7 +130,7 @@
                                  <td class="small">
                                     <span class="btn btn-sm btn-danger" (click)="selectedQuiz = x" data-toggle="modal" data-target="#deleteQuizModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
                                     <span class="btn btn-sm btn-warning" (click)="selectedQuiz = x" data-toggle="modal" data-target="#editQuizModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
-                                    <span class="btn btn-sm btn-success" (click)="detailsQuiz(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
+                                    <span class="btn btn-sm btn-success" (click)="quizDetails(x.id)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
                                   </td>
                                   
                             </tr>
@@ -140,6 +140,7 @@
             </div>
         </div>
     </div>
+    <!-- CLASS DETAILS -->
     <div class="col-md-4">
       <div class="card">
           <div class="card-body">
@@ -212,7 +213,7 @@
                       <tbody *ngIf="students">
                           <tr *ngFor="let x of students | filter:term | orderBy: order" >
                               <td>{{x?.rollno}}</td>
-                              <td>{{x.name}}</td>
+                              <td>{{x?.studentName}}</td>
                               <td>
                                   <!-- <span class="btn btn-sm btn-danger" (click)="selectedVaccine = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span>  -->
                                   <!-- <span class="btn btn-sm btn-warning" (click)="selectedVaccine = x" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit" aria-hidden="true"></i></span>  -->
@@ -377,6 +378,52 @@
   </div>
 
 
+  <!-- DETAIL ASSIGNMENT -->
+  <div class="modal fade" id="detailAssignmentModal" tabindex="-1" role="dialog" aria-labelledby="addAssignmentModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailAssignmentModal">Details Assigment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+                <div class="row">        
+                      <div class="col-md-12 ">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Roll no</th>
+                              <th>Name</th>
+                              <th>Date</th>
+                            </tr>
+                          </thead>
+                          <tbody *ngIf="uploads">
+                            <tr *ngFor="let x of uploads">
+                                <td>{{x?.rollno}}</td>
+                                <td>{{x?.studentName}}</td>
+                                <td>{{x?.date}}</td>
+                                <td>
+                                  <i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                       </div>
+                </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="leaveDetailAssignment()" >Close</button>
+          <!-- <button type="button" class="btn btn-primary" (click)="leaveDetailAssignment()" ></button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
   <!-- :::::::::::::: QUIZES ::::::::::: -->
@@ -480,6 +527,72 @@
                       <label for="">Note</label>
                       <textarea class="form-control" name="note" id="" rows="3" placeholder="Extra Note.."  [(ngModel)]="selectedQuiz.note"></textarea>
                     </div>
+                    <div class="col-md-12 ">
+                        <button type="button" *ngIf="showAddQuiz==false" class="btn btn-primary" (click)="showAddQuiz = !showAddQuiz">Add Question</button>
+                        <button type="button"  *ngIf="showAddQuiz==true" class="btn btn-danger" (click)="showAddQuiz = !showAddQuiz">Hide Inputs</button>
+
+                      <div class="row" *ngIf="showAddQuiz == true" >
+                          <div class="col-md-12 form-group">
+                              <label for="">QUESTION</label>
+                              <input type="text"
+                                class="form-control" name="Question" id="" aria-describedby="helpId" placeholder="Question?" [(ngModel)]="question.question">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="">OPTION #01</label>
+                                <input type="text"
+                                  class="form-control" name="option1" id="" aria-describedby="helpId" placeholder="OPTION #01" [(ngModel)]="question.option1">
+                              </div>
+                              <div class="col-md-3 form-group">
+                                  <label for="">OPTION #02</label>
+                                  <input type="text"
+                                    class="form-control" name="title" id="" aria-describedby="helpId" placeholder="OPTION #02" [(ngModel)]="question.option2">
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label for="">OPTION #03</label>
+                                    <input type="text"
+                                      class="form-control" name="title" id="" aria-describedby="helpId" placeholder="OPTION #03" [(ngModel)]="question.option3">
+                                  </div>
+                                  <div class="col-md-3 form-group">
+                                      <label for="">OPTION #04</label>
+                                      <input type="text"
+                                        class="form-control" name="title" id="" aria-describedby="helpId" placeholder="OPTION #04" [(ngModel)]="question.option4">
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="">Correct</label>
+                                        <input type="text"
+                                          class="form-control" name="title" id="" aria-describedby="helpId" placeholder="CORRECT OPTION" [(ngModel)]="question.correct">
+                                      </div>
+                                      <div class="col-md-3 form-group">
+                                       <button type="button" name="" id="" class="btn btn-success btn-lg btn-block" (click)="addQuestion()">ADD</button>
+                                      </div>
+                      </div>
+                      <div class="row" *ngIf="showAddQuiz == false" >
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Question</th>
+                              <th>Options</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let x of selectedQuiz.questions; let ind =index">
+                              <td>{{ind}}</td>
+                              <td class="strong">{{x?.question}}</td>
+                              <td class="small"><span>{{x?.option1}} , {{x?.option2}} , {{x?.option3}} , {{x?.option4}}</span></td>
+                              <td>
+                                  <span class="btn btn-sm btn-danger" (click)="removeQuestion(ind)" data-toggle="modal" data-target="#deleteAssignmentModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
+
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        </div>
+
+                       
+                     
+                      </div>
                 </div>
         </form>
         </div>
@@ -512,3 +625,54 @@
     </div>
   </div>
   </div>
+
+
+
+  <!-- DETAIL QUIZES -->
+  <div class="modal fade" id="detailQuizModal" tabindex="-1" role="dialog" aria-labelledby="detailQuizModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailQuizModal">Details Quizes</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+                  <div class="row">        
+                        <div class="col-md-12 ">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Roll no</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>RESULT</th>
+                              </tr>
+                            </thead>
+                            <tbody *ngIf="uploads">
+                              <tr *ngFor="let x of uploads">
+                                  <td>{{x?.rollno}}</td>
+                                  <td>{{x?.studentName}}</td>
+                                  <td>{{x?.date}}</td>
+                                  <td>
+                                    <span class="text-success">{{x?.correct}}</span> / <span class="text-primary">{{x?.total}}</span>
+
+                                  </td>
+                              </tr>
+                            </tbody>
+                          </table>
+  
+                         </div>
+                  </div>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="leaveDetailQuiz()" >Close</button>
+            <!-- <button type="button" class="btn btn-primary" (click)="leaveDetailAssignment()" ></button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  
