@@ -62,12 +62,12 @@ let ROUTES =[
 ]
 
 let firebaseConfig= {
-  apiKey: "AIzaSyCKlQfSGOwucl0hBwVMMrEemNVGMaHCQPQ",
-  authDomain: "university-management-fyp.firebaseapp.com",
-  databaseURL: "https://university-management-fyp.firebaseio.com",
-  projectId: "university-management-fyp",
-  storageBucket: "university-management-fyp.appspot.com",
-  messagingSenderId: "164013187253"
+  apiKey: "AIzaSyBl-ArJq_5OPpfBjddD1ss8sp1X_QGpVRk",
+    authDomain: "admin-deals.firebaseapp.com",
+    databaseURL: "https://admin-deals.firebaseio.com",
+    projectId: "admin-deals",
+    storageBucket: "admin-deals.appspot.com",
+    messagingSenderId: "692964759073"
 };
 
 @NgModule({
@@ -88,7 +88,8 @@ let firebaseConfig= {
     ClassesComponent,
     SettingComponent,
     HelpComponent,
-    ClassComponent
+    ClassComponent,
+    
   ],
   imports: [
     BrowserModule,

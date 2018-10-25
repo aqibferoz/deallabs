@@ -25,65 +25,58 @@
                       <table class="table">
                           <thead class=" text-primary">
                               <th>
-                                 Class ID
+                                 Title
                               </th>
                               <th>
-                                QR
+                                Description
                              </th>
-                              <th (click)="orderBy('courseName')">
-                                  Course Name
-                                  <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                              </th>
-                              <th (click)="orderBy('courseId')">
-                                Course ID
-                                <i *ngIf="order == 'courseName'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-
-                              </th>
-                              <th (click)="orderBy('room')">
-                                  Room No
-                                  <i *ngIf="order == 'room'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                              </th>
-                              <th (click)="orderBy('dosage')">
-                                  Students
-                                  <i *ngIf="order == 'dosage'"class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                              </th>
                               <th>
-                                Note
+                                  Category
+                               </th>
+                              <th >
+                                Start date
+                               
                               </th>
-                               <th>
-                                  Actions
-                              </th>
+                              <th >
+                                  End date
+                                 
+                                </th>
+                              
 
                           </thead>
-                          <tbody *ngIf="vaccines">
-                              <tr *ngFor="let x of vaccines | filter:term | orderBy: order" >
-                                  <td>
+                          <tbody *ngIf="deals">
+                              <tr *ngFor="let x of deals" >
+                                  <!-- <td>
                                     {{x?.id}}
-                                  </td>
-                                  <td>
+                                  </td> -->
+                                  <!-- <td>
                                     <qrcode [qrdata]="x.id"  colordark="#A23DB7" [size]="128" [level]="'M'"></qrcode>
 
+                                  </td> -->
+                                  <td>
+                                   
+                                    {{x.title}}
                                   </td>
                                   <td>
-                                    {{x?.courseName}}
+                                      {{x.description}}
                                   </td>
                                   <td>
-                                      {{x?.courseId}}
+                                      {{x?.category}}
                                   </td>
-                                  <td>
-                                      {{x?.room}}
-                                  </td>
-                                  <td>
+                                  <!-- <td>
                                     0
-                                  </td>
+                                  </td> -->
                                    <td>
-                                      {{x?.note}}
+                                      {{x?.start}}
+                                   </td>
+                                   <td>
+                                      {{x?.endate}}
                                    </td>
                                    <td>
 
-                                      <span class="btn btn-sm btn-danger" (click)="selectedClass = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
-                                      <span class="btn btn-sm btn-warning" (click)="selectedClass = x" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
-                                      <span class="btn btn-sm btn-success" (click)="details(x)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span> 
+                                       <span class="btn btn-sm btn-danger" (click)="selectedClass = x" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-remove" aria-hidden="true"></i></span> 
+                                      <span class="btn btn-sm btn-warning" (click)="deal = x" data-toggle="modal" data-target="#editModal" > <i class="fa fa-edit" aria-hidden="true"></i></span> 
+                                      <span class="btn btn-sm btn-success" (click)="details(x)"> <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span>  -->
                                     </td>
                               </tr>
                           </tbody>
@@ -109,11 +102,11 @@
       <h4 class="modal-title" id="deleteModal">Confirm Delete</h4>
     </div>
     <div class="modal-body" *ngIf="selectedClass">
-     Are you sure you want to delete <span class="text-danger"> {{selectedClass?.courseName}}</span> Class?       
+     Are you sure you want to delete <span class="text-danger"> {{selectedClass?.title}}</span> Class?       
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-      <button type="button" class="btn btn-danger" (click)="delete(selectedClass)">Delete</button>
+      <button type="button" class="btn btn-danger" (click)="deleteDeal(id)">Delete</button>
     </div>
   </div>
 </div>
@@ -125,34 +118,33 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Deal</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="container">
-          <form #classForm="ngForm" (submit)="submit(classForm.value)">
+          <form >
               <div class="row">
         <div class="col-md-6 form-group">
           <label for=""></label>
           <input type="text"
-            class="form-control" name="courseName" id="" aria-describedby="helpId" placeholder="Course Name" ngModel>
+            class="form-control" name="courseName" id="" aria-describedby="helpId" placeholder="Title" [(ngModel)]="dealsData.title">
         </div>
         <div class="col-md-6 form-group">
           <label for=""></label>
           <input type="text"
-            class="form-control" name="courseId" id="" aria-describedby="helpId" placeholder="Course ID" ngModel>
+            class="form-control" name="courseId" id="" aria-describedby="helpId" placeholder="Description" [(ngModel)]="dealsData.description">
         </div>
         <div class="col-md-6 form-group">
             <label for=""></label>
             <input type="text"
-              class="form-control" name="room" id="" aria-describedby="helpId" placeholder="Room No" ngModel>
+              class="form-control" name="room" id="" aria-describedby="helpId" placeholder="Category" [(ngModel)]="dealsData.category">
           </div>
    
                   <div class="col-md-12 form-group">
-                    <label for="">Note</label>
-                    <textarea class="form-control" name="note" id="" rows="3" placeholder="Extra Note.." ngModel></textarea>
+                    <textarea class="form-control" name="note" id="" rows="3" placeholder="Start date" [(ngModel)]="dealsData.start"></textarea>
                   </div>
               </div>
       </form>
@@ -161,7 +153,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="submit(classForm.value)" >Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="createdeal()" >Create deal</button>
       </div>
     </div>
   </div>
@@ -176,35 +168,35 @@
   <!-- Modal EDIT -->
   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content" >
           <div class="modal-header">
-            <h5 class="modal-title" id="editModal">Edit Class</h5>
+            <h5 class="modal-title" id="editModal">Edit Deal</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" *ngIf="selectedClass">
+          <div class="modal-body" *ngIf="deal">
             <div class="container">
-              <form #classUpdateForm="ngForm" (submit)="update(selectedClass)">
+              <form #classUpdateForm="ngForm" (submit)="update()">
                   <div class="row">
             <div class="col-md-12 form-group">
               <label for=""></label>
               <input type="text"
-                class="form-control" name="courseName" id="" aria-describedby="helpId" placeholder="Course Name" [(ngModel)]="selectedClass.courseName">
+                class="form-control" name="courseName" id="" aria-describedby="helpId" placeholder="Title" [(ngModel)]="deal.title">
             </div>
             <div class="col-md-6 form-group">
                 <label for=""></label>
                 <input type="text"
-                  class="form-control" name="courseId" id="" aria-describedby="helpId" placeholder="Course ID"  [(ngModel)]="selectedClass.courseId">
+                  class="form-control" name="courseId" id="" aria-describedby="helpId" placeholder="Description"  [(ngModel)]="deal.description">
               </div>
               <div class="col-md-6 form-group">
                   <label for=""></label>
                   <input type="text"
-                    class="form-control" name="room" id="" aria-describedby="helpId" placeholder="Room No"  [(ngModel)]="selectedClass.room">
+                    class="form-control" name="room" id="" aria-describedby="helpId" placeholder="Category"  [(ngModel)]="deal.category">
                 </div>
                       <div class="col-md-12 form-group">
                         <label for="">Note</label>
-                        <textarea class="form-control" name="note" id="" rows="3" placeholder="Extra Note.."  [(ngModel)]="selectedClass.note"></textarea>
+                        <textarea class="form-control" name="note" id="" rows="3" placeholder="Start Date"  [(ngModel)]="deal.start"></textarea>
                       </div>
                   </div>
           </form>
@@ -212,8 +204,92 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="update(selectedClass)" >Save changes</button>
+            <button type="button" class="btn btn-primary" (click)="updateDeals(deal.id, deal)" >Update</button>
           </div>
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="main-panel">
+  <app-header></app-header>
+  <div class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-8">
+                  <div class="card">
+                      <div class="card-header card-header-primary">
+                          <h4 class="card-title">Edit Profile</h4>
+                          <p class="card-category">Complete your profile</p>
+                      </div>
+                      <div class="card-body" *ngIf="admin">
+                              
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating">Title</label>
+                                          <input type="text" class="form-control" [(ngModel)]="dealsData.title">
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating">Description</label>
+                                          <input type="text" class="form-control" [(ngModel)]="dealsData.description">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating">Link</label>
+                                          <input type="text" class="form-control" [(ngModel)]="dealsData.link">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating">Category</label>
+                                          <input type="text" class="form-control" [(ngModel)]="dealsData.category">
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating">Start date</label>
+                                          <input type="text" class="form-control" [(ngModel)]="dealsData.start">
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating">End date</label>
+                                          <input type="text" class="form-control" [(ngModel)]="dealsData.enddate">
+                                      </div>
+                                  </div>
+                              </div>
+                              
+                              <button class="btn btn-primary pull-right" (click)="createdeal()">Create Deal</button>
+                              <div class="clearfix"></div>
+                      </div>
+                  </div>
+              </div>
+                          
+                     
+          </div>
+      </div>
+  </div>
+  </div> -->

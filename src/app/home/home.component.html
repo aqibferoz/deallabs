@@ -19,7 +19,7 @@
                       <div class="card-footer">
                           <div class="stats">
                               <i class="material-icons text-danger">warning</i>
-                              <a routerLink="/dashboard/classes">Generate more...</a>
+                              <button class="btn btn-primary pull-right"  routerLink="/dashboard/classes">Create Deal</button>
                           </div>
                       </div>
                   </div>
@@ -37,12 +37,12 @@
                       </div>
                       <div class="card-footer">
                           <div class="stats">
-                              <i class="material-icons">date_range</i> Last 24 Hours
-                          </div>
+                            <button class="btn btn-primary pull-right" routerLink="/dashboard/profile">Create Influencer</button>
+                        </div>
                       </div>
                   </div>
               </div>
-              <div class="col-lg-3 col-md-6 col-sm-6">
+              <!-- <div class="col-lg-3 col-md-6 col-sm-6">
                   <div class="card card-stats">
                       <div class="card-header card-header-danger card-header-icon">
                           <div class="card-icon">
@@ -57,7 +57,7 @@
                           </div>
                       </div>
                   </div>
-              </div>
+              </div> -->
               <div class="col-lg-3 col-md-6 col-sm-6">
                   <div class="card card-stats">
                       <div class="card-header card-header-info card-header-icon">
@@ -74,6 +74,29 @@
                       </div>
                   </div>
               </div>
+
+
+                <!--we will put ngFor here to bind data here-->
+                <div class="container">
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                          <ul *ngIf="deals">
+                              <li *ngFor="let x of deals;let i = index">
+                           <b>  {{i}} ) </b>   {{x.title}} 
+                           {{x.description}}
+                           {{x.link}}
+                           {{x.category}}
+                           {{x.start}}
+                           {{x.endate}}
+                           
+                              
+                              </li>
+                            </ul>
+                      </div>
+                    </div>
+                  </div>
+
+
           </div>
       </div>
   </div>

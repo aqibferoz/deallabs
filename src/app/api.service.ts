@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ActivatedRouteSnapshot } from '@angular/router';
 @Injectable()
 export class ApiService {
 admin;
@@ -26,6 +27,56 @@ adminId;
   signupTeacher(email, pass){
     return this.fbAuth.auth.createUserWithEmailAndPassword(email, pass);
   }
+
+//////deals//////
+createDeal(data) {
+  return this.afs.collection('deal').add(data);
+}
+
+updateDeal(uid, data) {
+  return this.afs.doc('deal/'+uid).update(data);
+}
+
+deleteDeal(uid) {
+  return this.afs.collection('deal').doc(uid).delete();
+}
+
+getDeal(uid) {
+  return this.afs.doc('deal/'+uid).valueChanges();
+}
+
+getDeals() {
+  return this.afs.collection('deal').valueChanges();
+}
+gettingDeals(){
+  return this.afs.collection('deal').snapshotChanges();
+}
+
+
+
+
+//////Influencers//////
+createInfluencer(data) {
+  return this.afs.collection('influencers').add(data);
+}
+
+updateInfluencer(uid, data) {
+  return this.afs.collection('influencers').doc(uid).update(data);
+}
+
+deleteInfluencer(uid) {
+  return this.afs.collection('influencers').doc(uid).delete();
+}
+
+getInfluencer(uid) {
+  return this.afs.collection('influencers').doc(uid).valueChanges();
+}
+
+getInfluencers() {
+  return this.afs.collection('influencers').snapshotChanges();
+}
+
+
 
 
 

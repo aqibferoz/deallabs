@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
     email:'moeidsaleemkhan@gmail.com',
     password:'moeid123'
   }
-error;  
+error;
 correct={
   email:'khushboohussain77@gmail.com',
   password:'polio123'
